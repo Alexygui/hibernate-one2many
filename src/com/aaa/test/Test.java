@@ -1,4 +1,4 @@
-package com.aaa.util;
+package com.aaa.test;
 
 
 import java.util.Set;
@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 
 import com.aaa.entity.Grade;
 import com.aaa.entity.Student;
+import com.aaa.util.HibernateUtil;
 
 /*
  * 单向一对多关系（班级-->学生）
@@ -17,7 +18,9 @@ import com.aaa.entity.Student;
 public class Test {
 	public static void main(String[] args) {
 		//add();
-		findStudentsByGrade();
+		//findStudentsByGrade();
+		//update();
+		delete();
 	}
 	
 	//将学生添加到班级
@@ -49,5 +52,27 @@ public class Test {
 		for(Student aStudent : students) {
 			System.out.println(aStudent.getSname() + "," + aStudent.getSex());
 		}
+	}
+	
+	//修改学生信息
+	public static void update() {
+		Grade grade = new Grade("Java二班", "Java软件开发二班");
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		Student aStudent = (Student) session.get(Student.class, 1);
+		grade.getStudents().add(aStudent);
+		session.save(grade);
+		transaction.commit();
+		HibernateUtil.closeSession(session);
+	}
+	
+	//删除学生信息
+	public static void delete() {
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		Student aStudent = (Student) session.get(Student.class, 2);
+		session.delete(aStudent);
+		transaction.commit();
+		HibernateUtil.closeSession(session);
 	}
 }
