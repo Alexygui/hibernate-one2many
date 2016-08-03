@@ -27,9 +27,10 @@ public class Test02 {
 		student2.setGrade(grade);
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
+		//grade.hbm.xml中添加级联的配置
 		session.save(grade);
-		session.save(student1);
-		session.save(student2);
+		//session.save(student1);
+		//session.save(student2);
 		transaction.commit();
 		HibernateUtil.closeSession(session);
 	}
