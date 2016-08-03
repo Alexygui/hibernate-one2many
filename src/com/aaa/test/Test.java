@@ -59,6 +59,7 @@ public class Test {
 		Grade grade = new Grade("Java二班", "Java软件开发二班");
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
+		//读取学号为1的学生的信息
 		Student aStudent = (Student) session.get(Student.class, 1);
 		grade.getStudents().add(aStudent);
 		session.save(grade);
