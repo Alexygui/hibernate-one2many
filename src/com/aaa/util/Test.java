@@ -1,6 +1,8 @@
 package com.aaa.util;
 
 
+import java.util.Set;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -9,10 +11,13 @@ import com.aaa.entity.Student;
 
 /*
  * 单向一对多关系（班级-->学生）
+ * 建立关联关系后，可以方便的从一个对象导航到另一个对象
+ * 不过要注意关联的方向
  */
 public class Test {
 	public static void main(String[] args) {
-		add();
+		//add();
+		findStudentsByGrade();
 	}
 	
 	//将学生添加到班级
@@ -32,5 +37,17 @@ public class Test {
 		session.save(student2);
 		transaction.commit();
 		HibernateUtil.closeSession(session);
+	}
+	
+	//查询班级中包含的学生
+	public static void findStudentsByGrade() {
+		Session session = HibernateUtil.getSession();
+		Grade grade = (Grade) session.get(Grade.class, 1);
+		System.out.println(grade.getGname() + "," + grade.getGdesc());
+		
+		Set<Student> students = grade.getStudents();
+		for(Student aStudent : students) {
+			System.out.println(aStudent.getSname() + "," + aStudent.getSex());
+		}
 	}
 }
