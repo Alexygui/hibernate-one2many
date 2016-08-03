@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- 持久化类的配置文件：名称name和对象数据库的表明：table -->
+	<class name="com.aaa.entity.Grade" table="grade">
+		<!-- 主键对应的字段名称，表中的名称column和数据类型type -->
+		<id name="gid" column="gid" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		<property name="gname" type="java.lang.String">
+			<column name="gname" length="20" not-null="true"></column>
+		</property>
+		<property name="gdesc">
+			<column name="gdesc"></column>
+		</property>
+		<!-- 配置一对多的单向关联关系 -->
+		<set name="students" table="student">
+			<!-- 指定关联的外键 -->
+			<key column="gid"></key>
+			<one-to-many class="com.aaa.entity.Student" />
+		</set>
+	</class>
+</hibernate-mapping>

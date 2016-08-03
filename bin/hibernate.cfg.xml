@@ -5,7 +5,6 @@
 
 <hibernate-configuration>
 	<session-factory>
-
 		<property name="myeclipse.connection.profile">mysql</property>
 		<property name="connection.url">
 	<![CDATA[
@@ -21,11 +20,11 @@
 			org.hibernate.dialect.MySQLDialect
 		</property>
 
-		<mapping class="org.hibernate.osgitest.entity.DataPoint" />
-		
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
+		<!-- 制定映射文件的路径 -->	
+		<mapping resource="com/aaa/entity/Grade.hbm.xml"/>
+		<mapping resource="com/aaa/entity/Student.hbm.xml"/>
 	</session-factory>
-
 </hibernate-configuration>

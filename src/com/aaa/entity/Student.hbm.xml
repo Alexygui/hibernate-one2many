@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- 持久化类的配置文件：名称name和对象数据库的表明：table -->
+	<class name="com.aaa.entity.Student" table="student">
+		<!-- 主键对应的字段名称，表中的名称column和数据类型type -->
+		<id name="sid" column="sid" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		<property name="sname" type="java.lang.String">
+			<column name="sname" length="20" not-null="true"></column>
+		</property>
+		<property name="sex">
+			<column name="sex"></column>
+		</property>
+	</class>
+</hibernate-mapping>
